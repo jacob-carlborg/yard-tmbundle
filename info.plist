@@ -65,5 +65,14 @@
 	</array>
 	<key>uuid</key>
 	<string>99270392-BF3F-45A6-91EF-08CAB0314D8F</string>
+	<key>require</key>
+	<array>
+		<dict>
+			<key>name</key>
+			<string>Ruby</string>
+			<key>uuid</key>
+			<string>467B298F-6227-11D9-BFB1-000D93589AF6</string>
+		</dict>
+	</array>
 </dict>
 </plist>
