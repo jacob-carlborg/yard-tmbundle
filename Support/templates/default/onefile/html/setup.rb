@@ -8,7 +8,7 @@ def init
   @files.shift
   @objects.delete(YARD::Registry.root)
   @objects.unshift(YARD::Registry.root)
-  sections :layout, [:readme, :files, :all_objects]
+  sections :layout, [:files, :all_objects]
 end
 
 def all_objects
