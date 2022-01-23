@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>beforeRunningCommand</key>
+	<string>nop</string>
+	<key>command</key>
+	<string>#!/usr/bin/env ruby20
+
+require 'tmpdir'
+require "#{ENV['TM_SUPPORT_PATH']}/lib/exit_codes"
+require "#{ENV['TM_RUBY_BUNDLE_SUPPORT']}/lib/executable"
+
+Dir.chdir(ENV['TM_PROJECT_DIRECTORY']) if ENV['TM_PROJECT_DIRECTORY']
+
+begin
+  executable = Executable.find('yard')
+rescue Executable::NotFound =&gt; e
+  TextMate.exit_show_tool_tip(e.message)
+end
+
+Dir.mktmpdir do |output_dir|
+  template_path = File.join(ENV['TM_BUNDLE_SUPPORT'], 'templates')
+
+  system(*executable, 'doc',
+    '--quiet',
+    '--no-save',
+    '--no-cache',
+    '--one-file',
+    '--no-progress',
+    '--no-stats',
+    '--markup', 'markdown',
+    '--output-dir', output_dir,
+    '--template-path', template_path,
+    ENV['TM_FILEPATH']
+  )
+
+  output_file = File.join(output_dir, 'index.html')
+  puts File.read(output_file)
+end</string>
+	<key>input</key>
+	<string>none</string>
+	<key>inputFormat</key>
+	<string>text</string>
+	<key>keyEquivalent</key>
+	<string>^y</string>
+	<key>name</key>
+	<string>Generate Documentation</string>
+	<key>outputCaret</key>
+	<string>afterOutput</string>
+	<key>outputFormat</key>
+	<string>html</string>
+	<key>outputLocation</key>
+	<string>newWindow</string>
+	<key>scope</key>
+	<string>source.ruby</string>
+	<key>uuid</key>
+	<string>A110C1C9-E2E3-4608-807A-E6CB39340E3D</string>
+	<key>version</key>
+	<integer>2</integer>
+</dict>
+</plist>

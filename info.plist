@@ -2,6 +2,19 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>description</key>
+	<string>#!/usr/bin/env ruby20
+
+require "#{ENV['TM_RUBY_BUNDLE_SUPPORT']}/lib/executable"
+
+Dir.chdir(ENV['TM_PROJECT_DIRECTORY']) if ENV['TM_PROJECT_DIRECTORY']
+
+begin
+  executable = Executable.find('yard')
+  system(*executable, 'doc', '--template-path', )
+rescue Executable::NotFound =&gt; e
+
+end</string>
 	<key>mainMenu</key>
 	<dict>
 		<key>items</key>
